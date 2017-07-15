@@ -7,8 +7,9 @@ class Menu extends Component{
 
   render(){
     return(
-      <div>
-        <h1>THIS IS THE MENU</h1>
+      <div className="menu">
+        <span className="menu-title">Taxi-Native
+        <br/>Admin Panel</span>
       </div>
     );
   }

@@ -1,0 +1,35 @@
+.container{
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+}
+
+.menu{
+  position: relative;
+  width: 300px;
+  height: auto;
+  top: 0px;
+  left: 0px;
+  background-color: #1b2845;
+  color: white;
+  text-align: center;
+  padding-top: 40px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.menu-title{
+  font-size: 34px;
+}
+
+.panel{
+  position: relative;
+  width: 500px;
+  top: 0px;
+  left: 0px;
+  background-color: white;
+  height: auto;
+}

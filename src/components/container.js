@@ -11,8 +11,8 @@ class Container extends Component{
   render(){
     return(
       <div className="container">
-        <Menu className="menu" active={this.state.active}/>
-        <Panel className="panel" active={this.state.active}/>
+        <Menu active={this.state.active}/>
+        <Panel active={this.state.active}/>
       </div>
     );
   }

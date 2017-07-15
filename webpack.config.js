@@ -13,13 +13,18 @@ module.exports = {
         exclude: [/node_modules/],
         use: [{
           loader: 'babel-loader',
-          options: { presets: ['es2015'] },
+          options: { presets: ['es2015', 'react'] },
         }],
       },
     ],
   },
   output: {
-    path: path.resolve(__dirname, './public/js'),
-    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, './public'),
+    filename: 'index.js',
   },
+  devServer: {
+    publicPath: "/",
+    contentBase: "./public",
+    hot: true
+  }
 };

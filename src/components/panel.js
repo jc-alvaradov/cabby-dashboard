@@ -7,9 +7,7 @@ class Panel extends Component{
 
   render(){
     return(
-      <div>
-        <h1>THIS IS THE PANEL</h1>
-      </div>
+      <div className="panel"></div>
     );
   }
 }
