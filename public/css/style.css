@@ -1,0 +1,14 @@
+.container{
+  flex: 1;
+  flex-direction: row;
+}
+
+.menu{
+  width: 200px;
+  height: auto;
+}
+
+.panel{
+  width: 500px;
+  height: auto;
+}
