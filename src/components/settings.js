@@ -10,17 +10,25 @@ class Settings extends Component{
       <div>
         <div className="title"><h1>Settings Menu</h1></div>
         <div className="settings-panel">
-          <tr>
-            <td><b>App Name: </b></td>
-            <td><FormControl type="email" placeholder="Taxi Native" className="input-search-box" /></td>
-          </tr>
-          <tr>
-            <td><b>Google Maps API Key: </b></td>
-            <td>                <FormControl type="email" placeholder="API key" className="input-search-box" /></td>
-          </tr>
-          <tr>
-            <td><Button className="botonsito">Save Changes</Button></td>
-          </tr>
+          <table>
+            <tbody>
+              <tr>
+                <td><b>App Name: </b></td>
+                <td><FormControl type="email" placeholder="Taxi Native" className="input-search-box" /></td>
+              </tr>
+              <tr>
+                <td><b>App Photo: </b></td>
+                <td><FormControl type="email" placeholder="Photo Link" className="input-search-box" /></td>
+              </tr>
+              <tr>
+                <td><b>Google Maps API Key: </b></td>
+                <td><FormControl type="email" placeholder="API key" className="input-search-box" /></td>
+              </tr>
+            </tbody>
+          </table>
+          <div className="center-div">
+            <Button className="main-btn settings-btn">Save Changes</Button>
+          </div>
         </div>
       </div>
     );

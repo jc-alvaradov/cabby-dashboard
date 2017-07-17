@@ -36,7 +36,7 @@ class Clients extends Component{
             </div>
             <div>
               <FormControl id="client-search-box" type="text" label="Text" placeholder="Search client by name or id" className="input-search-box"/>
-              <Button className="botonsito">Search</Button>
+              <Button className="main-btn">Search</Button>
             </div>
           </div>
           <div className="search-results">

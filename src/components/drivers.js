@@ -36,7 +36,7 @@ class Drivers extends Component{
             </div>
             <div>
               <FormControl id="driver-search-box" type="text" label="Text" placeholder="Search driver by name, id or car patent" className="input-search-box"/>
-              <Button className="botonsito">Search</Button>
+              <Button className="main-btn">Search</Button>
             </div>
           </div>
           <div className="search-results">

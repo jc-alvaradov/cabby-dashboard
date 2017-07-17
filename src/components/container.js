@@ -15,7 +15,7 @@ class Container extends Component{
       <div className="container">
         <div className="menu">
           <div className="menu-title">
-            <Image src="http://via.placeholder.com/120x120" circle />
+            <Image src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/TAXI.jpg/1200px-TAXI.jpg" width="120" height="120" circle />
             <br/>
             <h1>Taxi Native</h1>
           </div>
