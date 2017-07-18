@@ -1,29 +1,37 @@
 import React, { Component } from 'react';
-import ActiveRide from './activeRide';
-import { Button } from 'react-bootstrap';
+import axios from 'axios';
+import RidesMenu from './menu/ridesMenu';
+import Loading from './menu/loading';
+//import { RidesMenu, Loading } from './menu';
 
 class Rides extends Component{
   constructor(props){
     super(props);
+    this.state = {
+      "loading": "true",
+      "rides": []
+    };
+  }
+
+  componentDidMount(){
+    // hacer el fetch de los rides de forma asincrona
+    // cuando respondan cambiamos loading a false
+    // acuerdate de content-type: app/json
+    axios.defaults.headers.post['Content-Type'] = 'application/json';
+    axios.post('http://localhost:3000/graphql', {
+      "query": "query { getAllRides{ driverName clientName amount startLocation destination rideState cancelReason rating } }"
+    }).then(res => {
+      this.setState({ rides: res.data.data.getAllRides });
+      this.setState({ loading: false });
+    });
   }
 
   render(){
-    //Hacer peticion a graphql por todos los rides activos
-    let activeRides = [];
-    if(activeRides.length > 0){
-      activeRides.map((ride) => {
-        return <ActiveRide ride={ride} />;
-      });
-    }else{
-      activeRides = "No rides right now...";
+    if(this.state.loading){
+      return <Loading />
     }
-    return(
-      <div>
-        <div className="title"><h1>Rides Menu</h1></div>
-        {activeRides}
-        <Button bsStyle="success">Success</Button>
-      </div>
-    );
+
+    return <RidesMenu rides={this.state.rides} />;
   }
 }
 
