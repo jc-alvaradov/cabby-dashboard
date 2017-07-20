@@ -27,7 +27,7 @@ class Settings extends Component{
             </tbody>
           </table>
           <div className="center-div">
-            <Button className="main-btn settings-btn">Save Changes</Button>
+            <Button className="main-btn primary-btn">Save Changes</Button>
           </div>
         </div>
       </div>

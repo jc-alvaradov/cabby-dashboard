@@ -7,13 +7,22 @@ class RidesMenu extends Component{
     super(props);
     this.state = {
       sItem: "Active rides",
-      showLocationModal: false
+      showLocationModal: false,
+      lat: "-34.397",
+      lng: "150.644",
+      title: "Default Title"
     };
     this.closeModal = this.closeModal.bind(this);
+    this.deleteRide = this.deleteRide.bind(this);
   }
 
   closeModal(){
     this.setState({ showLocationModal: false });
+  }
+  
+  deleteRide(rideId){
+    // mandamos una peticion con axios a nuestro servidor indicandole q elimine el ride
+    console.log("Voy a eliminar: " + rideId);
   }
 
   render(){
@@ -25,14 +34,14 @@ class RidesMenu extends Component{
       content = this.props.rides.map((ride) => {
         return(
           <tr key={ ride.driverName + ride.clientName}>
-            <td><b>{ ride.amount }</b></td>
+            <td><b>${ ride.amount }</b></td>
             <td>{ ride.driverName }</td>
             <td>{ ride.clientName }</td>
-            <td><Button bsStyle="default" onClick={() => this.setState({showLocationModal: !this.state.showLocationModal})}>Show on map</Button></td>
-            <td><Button bsStyle="default">Show on map</Button></td>
+            <td><Button bsStyle="default" onClick={() => this.setState({showLocationModal: !this.state.showLocationModal, lat: ride.startLocation.lat, lng: ride.startLocation.lng, title: "Start Location" })}>Show on map</Button></td>
+            <td><Button bsStyle="default" onClick={() => this.setState({showLocationModal: !this.state.showLocationModal, lat: ride.destination.lat, lng: ride.destination.lng, title: "Destination" })}>Show on map</Button></td>
             <td>{ ride.rideState }</td>
             <td>
-              <Button bsStyle="danger">
+              <Button bsStyle="danger" onClick={() => this.deleteRide(ride.rideId)}>
                 <i className="icon-trash-empty"/>Delete
               </Button>
             </td>
@@ -42,7 +51,7 @@ class RidesMenu extends Component{
 
     return(
       <div>
-        <LocationModal title="Ubicación actual" text="Conductor" close={this.closeModal} show={ this.state.showLocationModal } lat={-34.397} lng={150.644}/>
+        <LocationModal title={ this.state.title } text="Conductor" close={this.closeModal} show={ this.state.showLocationModal } lat={this.state.lat} lng={this.state.lng}/>
         <div className="title"><h1>Rides Menu</h1></div>
         <div className="search-box">
           <div className="search-options">

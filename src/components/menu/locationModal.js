@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import { Modal } from 'react-bootstrap';
 import { withGoogleMap, GoogleMap, } from 'react-google-maps';
 
-const LocationMap = withGoogleMap(props => (
-  <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
-  />
-));
-
 class LocationModal extends Component{
   constructor(props){
     super(props);
   }
 
   render(){
+    const LocationMap = withGoogleMap(props => (
+      <GoogleMap
+        defaultZoom={15}
+        defaultCenter={{ lat: parseFloat(this.props.lat), lng: parseFloat(this.props.lng) }}
+      />
+    ));
+
+
     return(
       <Modal show={this.props.show} onHide={this.props.close}>
         <Modal.Header closeButton>
