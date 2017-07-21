@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Button, FormControl } from 'react-bootstrap';
-import axios from 'axios';
-axios.defaults.headers.post['Content-Type'] = 'application/json';
-axios.defaults.withCredentials = true;
-axios.defaults.useXDomain = true;
+import { graphRequest } from './graphRequest';
 
 class LoginForm extends Component{
   constructor(props){
@@ -34,27 +31,19 @@ class LoginForm extends Component{
   }
   
   loginUser(){
-    // hacer peticion con axios para hacer login
     if(this.state.username && this.state.passwd){
-      console.log("voy a autenticar");
-      axios.post('http://localhost:3000/login', {
+      graphRequest("login", {
         username: this.state.username,
         password: this.state.passwd
       }).then(res => {
         if(res.data == "LOGIN-SUCCESS"){
-
+          this.props.update();
         }else{
-
+          alert("Login error, try again");
         }
-
-        console.log("llegooo cartaaaa <3");
-        console.log(res.data);
-        //this.setState({ rides: res.data.data.getAllRides });
-      }).catch(err => {
-        console.log("hubo un error " + err);
       });
     }else{
-      console.log("Please fill all fields.");
+      alert("Please fill all fields.");
     }
   }
 }

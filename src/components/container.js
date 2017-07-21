@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Image } from 'react-bootstrap';
 import Panel from './panel';
 import MenuItem from './menuItem';
-import { Image } from 'react-bootstrap';
 
 class Container extends Component{
   constructor(props){
@@ -9,6 +9,8 @@ class Container extends Component{
     this.state = {"active": "Rides"};
     this.changeState = this.changeState.bind(this);
   }
+
+  // AGREGAR BOTON PARA CERRAR SESION
 
   render(){
     return(

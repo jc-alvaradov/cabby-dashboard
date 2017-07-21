@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormControl, Form, ControlLabel, FormGroup, Col, Button} from 'react-bootstrap';
+import { FormControl, Button} from 'react-bootstrap';
 class Settings extends Component{
   constructor(props){
     super(props);

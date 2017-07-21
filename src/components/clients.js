@@ -1,58 +1,65 @@
 import React, { Component } from 'react';
-import { Button, ButtonToolbar, DropdownButton, MenuItem, FormControl, Table, Image } from 'react-bootstrap';
+import SearchBox from './searchBox';
+import ListDropdown from './listDropdown';
+import ResultsTable from './resultsTable';
+import DeleteBtn from './deleteBtn';
+import { graphRequest } from './graphRequest';
 
 class Clients extends Component{
   constructor(props){
     super(props);
-    this.state = {
-      "sItem": "Active clients"
-    };
+    this.state = {"results": []};
+    this.reloadComponent = this.reloadComponent.bind(this);
+    this.listCallBack = this.listCallBack.bind(this);
+    this.searchCallBack = this.searchCallBack.bind(this);
   }
 
   render(){
-    // pedimos los conductores usando ajax
-    // let drivers = []; 
-    /*
-    if(drivers.length > 0){
-      content = drivers.map();
-    }else{
-      content = "No drivers found...";
-    }
-    
-    */
-
     return(
       <div>
         <div className="title"><h1>Clients Menu</h1></div>
         <div className="search-box">
           <div className="search-options">
-            <div>
-              <b>List: </b>
-              <DropdownButton bsStyle="default" title={this.state.sItem} id="show-dropdown">
-                <MenuItem eventKey="active-clients" onClick={() => this.setState({sItem: "Active clients"})} className={(this.state.sItem === "Active clients") ? "active" : ""}>Active Clients</MenuItem>
-                <MenuItem eventKey="inactive-clients" onClick={() => this.setState({sItem: "Inactive clients"})} className={(this.state.sItem === "Inactive clients") ? "active" : ""}>Inactive Clients</MenuItem>
-                <MenuItem eventKey="all-clients" onClick={() => this.setState({sItem: "All clients"})} className={(this.state.sItem === "All clients") ? "active" : ""}>All Clients</MenuItem>
-              </DropdownButton>
-            </div>
-            <div>
-              <FormControl id="client-search-box" type="text" label="Text" placeholder="Search client by name or id" className="input-search-box"/>
-              <Button className="main-btn">Search</Button>
-            </div>
+            <ListDropdown listCallBack={this.listCallBack} id="clients-dropdown" items={["Active Clients", "Inactive Clients", "All Clients"]}/>
+            <SearchBox searchCallBack={this.searchCallBack} id="clients-search-box" placeHolder="Search client by name or id" />
           </div>
-          <div className="search-results">
-            <Table striped bordered condensed hover className="results-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Phone Number</th>
-                  <th>Rating</th>
-                  <th>Current Location</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
+          <ResultsTable headers={["Name", "Phone Number", "Rating", "Current Location", "Edit", "Delete"]} objects={this.state.results}/>
+        </div>
+      </div>
+    );
+  }
+
+  componentDidMount() {
+    reloadComponent();
+  }
+
+  reloadComponent() {
+    // pedimos todos los clientes y los mostramos
+    graphRequest("graphql", { 
+      "query": "query { getClients{ clientName active rating } }"
+    }).then(results => {
+      results.map(result => {
+        // convertir location en un boton
+        // hacer edit
+        result.push({"Delete": <DeleteBtn id={result._id} type="client" reload={this.reloadComponent}/>});
+      });
+      this.setState({results});
+    });
+  }
+
+  listCallBack() {
+    // buscar filtrando por el metodo que se envia, cambiar el estado
+  }
+
+  searchCallBack(search) {
+    // buscar por el termino que se envia, cambiar el estado
+  }
+}
+
+export default Clients;
+
+/*
+ <tr>
                   <td>Juan Alvarado</td>
                   <td>Table cell</td>
                   <td><i className="icon-star" /> 5</td>
@@ -64,25 +71,5 @@ class Clients extends Component{
                     </Button>
                   </td>
                 </tr>
-                <tr>
-                  <td>Juan Alvarado</td>
-                  <td>Table cell</td>
-                  <td><i className="icon-star" /> 4.3</td>
-                  <td><Button bsStyle="default">Show on map</Button></td>
-                  <td><Button bsStyle="default">Edit</Button></td>
-                  <td>
-                    <Button bsStyle="danger">
-                      <i className="icon-trash-empty"/>Delete
-                    </Button>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
 
-export default Clients;
+*/
