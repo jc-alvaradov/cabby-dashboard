@@ -7,10 +7,19 @@ export function makeQuery (type, resolver, props, vars, vartypes) {
     
   if(vars) {
     const vardefs = Object.keys(vars).map((key) => `${key}: $${key}`);
-    return {
-      "query": `${type}(${vartypes.toString()}) { ${resolver}(${vardefs}){ ${props.join(" ")}}}`, 
-      "variables": vars
-    };
+    if(props) {
+      // es una query
+      return {
+        "query": `${type}(${vartypes.toString()}) { ${resolver}(${vardefs}){ ${props.join(" ")}}}`, 
+        "variables": vars
+      };
+    }else {
+      // es una mutation
+      return {
+        "query": `${type}(${vartypes.toString()}) { ${resolver}(${vardefs})}`, 
+        "variables": vars
+      };
+    }
   }else {
    return {"query": `${type} { ${resolver}{ ${props.join(" ")}}}`};
   }

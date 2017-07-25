@@ -21,10 +21,9 @@ class ListDropdown extends Component {
       </div>
     );
   }
+  
   updateView(title){
     this.setState({selected: title});
-    // hacer toda la logica de armar el query y hacer la peticion en el callback
-    // ahora solo enviare el nombre del filtro que quiero aplicar
     this.props.listCallBack(title);
   }
 }

@@ -10,7 +10,7 @@ class SearchBox extends Component {
     return(
       <div>
         <FormControl id={ this.props.id } onChange={(e) => this.setState({searchBox: e.target.value})} type="text" label="Text" placeholder={ this.props.placeHolder } className="input-search-box"/>
-        <Button className="main-btn" onClick={ this.props.searchCallBack(this.state.searchBox) }>Search</Button>
+        <Button className="main-btn" onClick={() => this.props.searchCallBack(this.state.searchBox) }>Search</Button>
       </div>
     );
   }
