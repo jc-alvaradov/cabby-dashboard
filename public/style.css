@@ -204,6 +204,13 @@ html{
   align-items: center;
 }
 
+.flex-center-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .results-table{
   background-color: white;
   text-align: center;

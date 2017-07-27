@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 import ModalWindow from './modalWindow';
+import RideForm from './forms/rideForm';
+//import DriverForm from './forms/driverForm';
+//import ClientForm from './forms/clientForm';
+//import RatingForm from './forms/ratingForm';
 
 class EditBtn extends Component {
   constructor(props){
@@ -9,20 +13,34 @@ class EditBtn extends Component {
     this.close = this.close.bind(this);
   }
   render(){
-    // muestra un modal
-    // editar un cliente, conductor, ride, etc. cada uno tiene valores distintos.
-    // esos valores llenan cambpos cons los datos que se reciben como props.
-    // cuando se quiere guardar los cambios se envia una peticion con axios.
+    let content;
+    switch (this.props.type){
+      case "rides":
+        content = <RideForm data={this.props.data} close={this.close}/>;
+        break;
+      case "drivers":
+        //content = <DriverForm data={this.props.data} />;
+        break;
+      case "clients":
+        //content = <ClientForm data={this.props.data} />;
+        break;
+      case "ratings":
+        //content = <RatingForm data={this.props.data} />;
+        break;
+      default:
+        content = null;
+    }
 
     return(
       <div>
         <Button onClick={() => this.setState({show: !this.state.show})}>Edit</Button>
-        <ModalWindow show={this.state.show} close={this.close} content={<div></div>} />
+        <ModalWindow show={this.state.show} title="Edit" size={"small"} close={this.close} content={content} />
       </div>
     );
   }
   
-  close(){
+  close() {
+    this.props.reload();
     this.setState({show: false});
   }
 }

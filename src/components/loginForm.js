@@ -18,9 +18,20 @@ class LoginForm extends Component{
         <div className="login-panel">
           <div>
             <h4><b>Username</b></h4>
-            <FormControl style={{width: 200}} type="text" className="input-search-box" onChange={(e) => this.setState({username: e.target.value})} /><br />
+            <FormControl 
+              style={{width: 200}} 
+              type="text" 
+              placeholder="Username"
+              className="input-search-box" 
+              onChange={(e) => this.setState({username: e.target.value})} />
+            <br />
             <h4><b>Password</b></h4>
-            <FormControl style={{width: 200}} type="password" className="input-search-box" onChange={(e) => this.setState({passwd: e.target.value})} />
+            <FormControl 
+              style={{width: 200}} 
+              type="password" 
+              placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
+              className="input-search-box" 
+              onChange={(e) => this.setState({passwd: e.target.value})} />
           </div>
           <div className="center-div">
             <Button className="main-btn primary-btn" style={{width: 200}} onClick={() => this.loginUser()}>Login</Button>

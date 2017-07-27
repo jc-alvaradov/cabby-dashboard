@@ -29,7 +29,7 @@ class Rides extends Component {
       res = res.data.data[func];
       this.setState({ results: res });
       this.setState({ loading: false });
-      });
+    });
   }
 
   listCallBack(query) {
@@ -63,7 +63,7 @@ class Rides extends Component {
             <ListDropdown listCallBack={this.listCallBack} id="ratings-dropdown" items={["Active Rides", "Finished Rides", "Canceled Rides", "All Rides"]} />
             <SearchBox searchCallBack={this.searchCallBack} id="client-search-box" placeHolder="Search rides by client or driver name" />
           </div>
-          <ResultsTable reload={this.reloadComponent} type="rides" headers={["Amount", "Driver", "Client", "Start Location", "Destination", "State", "Edit", "Delete"]} objects={this.state.results}/>
+          <ResultsTable reload={this.reloadComponent} type="rides" headers={["Amount", "Driver", "Client", "State", "Ride Map", "Edit", "Delete"]} objects={this.state.results}/>
         </div>
       </div>
     );
