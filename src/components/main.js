@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Container from './container';
 import LoginForm from './loginForm';
 import Loading from './loading';
-import { graphRequest } from './graphRequest';
+import { graphRequest } from './graphGetRequest';
 
 class Main extends Component{
   constructor(props){

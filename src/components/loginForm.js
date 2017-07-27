@@ -44,8 +44,8 @@ class LoginForm extends Component{
   loginUser(){
     if(this.state.username && this.state.passwd){
       graphRequest("login", {
-        username: this.state.username,
-        password: this.state.passwd
+        username: this.state.username.trim(),
+        password: this.state.passwd.trim()
       }).then(res => {
         if(res.data == "LOGIN-SUCCESS"){
           this.props.update();
