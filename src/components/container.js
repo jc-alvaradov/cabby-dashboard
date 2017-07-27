@@ -29,7 +29,9 @@ class Container extends Component{
             <MenuItem name="Settings" changeState={this.changeState} iconName="icon-cog" selected={this.state.active} />
           </div>
           <div className="log-out-btn" onClick={() => this.logOut()}>
-            <h1>Log Out</h1>
+            <h1>
+              <i className="icon-logout"/>  Log Out
+            </h1>
           </div>
         </div>
         <Panel active={this.state.active}/>

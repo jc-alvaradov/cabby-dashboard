@@ -13,7 +13,12 @@ class MenuItem extends Component{
       };
     }
     return(
-      <div className="menu-item" onClick={() => this.props.changeState(this.props.name)} style={itemStyle}><i className={this.props.iconName}/>   {this.props.name}</div>
+      <div className="menu-item" 
+        onClick={() => this.props.changeState(this.props.name)} 
+        style={itemStyle}>
+        <i className={this.props.iconName}/>   
+        {this.props.name}
+      </div>
     );
   }
 }
