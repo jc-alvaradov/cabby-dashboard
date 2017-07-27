@@ -98,6 +98,12 @@ html{
   user-select: none;
 }
 
+.log-out-btn{
+  background-color: #181b1f;
+  cursor: pointer;
+  user-select: none;
+}
+
 .menu-item:hover{
   /*background-color: #1282a2; primario*/
   /*background-color: #1f1f1f; PLOMO1*/

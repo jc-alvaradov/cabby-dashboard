@@ -15,18 +15,18 @@ class Main extends Component{
     return this.state.render;
   }
   
-  componentDidMount(){
+  componentDidMount() {
+    this.updateRender();
+  }
+
+  updateRender() {
     graphRequest("login").then(res => {
-      if(res.data == "LOGIN-SUCCESS"){
-        this.setState({render: <Container /> });
-      }else{
+      if(res.data == "LOGIN-SUCCESS") {
+        this.setState({render: <Container update={this.updateRender}/> });
+      }else {
         this.setState({render: <LoginForm update={this.updateRender} />});
       }
     });
-  }
-
-  updateRender(){
-    this.setState({render: <Container />});
   }
 }
 
