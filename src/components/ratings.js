@@ -4,45 +4,93 @@ import ListDropdown from './listDropdown';
 import ResultsTable from './resultsTable';
 import DeleteBtn from './deleteBtn';
 import { graphRequest } from './graphRequest';
+import { makeQuery } from './makeQuery';
 
 class Ratings extends Component {
   constructor(props){
     super(props);
-    this.state = {"results": []};
+    this.state = {
+      "results": [],
+      "query": null
+    };
     this.reloadComponent = this.reloadComponent.bind(this);
+    this.listCallBack = this.listCallBack.bind(this);
+    this.searchCallBack = this.searchCallBack.bind(this);
   }
 
   componentDidMount() {
-    reloadComponent();
+    this.setState({query: 
+      makeQuery("query", "getRatings", 
+      ["id", "rating", "from", "to", "message", "date"],
+      {"filter": "most recent"}, ["$filter: String!"])
+    }, () => this.reloadComponent());
   }
 
   reloadComponent() {
-    // pedimos todos los ratings y los mostramos
-    const results = graphRequest("graphql", { 
-      "query": "query { getRatings{ driverName clientName rating amount  } }"
+    graphRequest("graphql", this.state.query).then(res => {
+      const func = Object.keys(res.data.data);
+      res = res.data.data[func];
+      this.setState({ results: res });
+      this.setState({ loading: false });
     });
-
-    results.map((result) => {
-      result.push({"Delete": <DeleteBtn id={result._id} type="rating" reload={this.reloadComponent}/>});
-    });
-
-    this.setState({results});
   }
+
+  listCallBack(selected) {
+    switch(selected) {
+      case "Most Recent":
+        selected = "most recent";
+        break;
+      case "Highests":
+        selected = "highest";
+        break;
+      case "Lowests":
+        selected = "lowest";
+        break;
+      case "All Ratings":
+        selected = "all";
+        break;
+    }
+    this.setState({query: 
+      makeQuery("query", "getRatings", 
+      ["id", "rating", "from", "to", "message", "date"],
+      {"filter": selected}, ["$filter: String!"])
+    }, () => this.reloadComponent());
+  }
+  searchCallBack(searchName) {
+    // user can search ratings by client or driver name    
+    this.setState({
+      query: makeQuery("query", "getRating", 
+      ["id", "rating", "from", "to", "message", "date"],
+      {"name": searchName}, ["$name: String!"])
+    }, this.reloadComponent);
+}
 
   render() {
     return(
       <div>
-        <div className="title"><h1>Ratings Menu</h1></div>
+        <div className="title">
+          <h1>Ratings Menu</h1>
+        </div>
         <div className="search-box">
           <div className="search-options">
-            <ListDropdown listCallBack={this.listCallBack} id="ratings-dropdown" items={["Most Recent", "Highests", "Lowests", "All Ratings"]}/>
-            <SearchBox searchCallBack={this.searchCallBack}id="client-search-box" placeHolder="Search ratings by client or driver name" />
+            <ListDropdown 
+              listCallBack={this.listCallBack} 
+              id="ratings-dropdown" 
+              items={["Most Recent", "Highests", "Lowests", "All Ratings"]} />
+            <SearchBox 
+              searchCallBack={this.searchCallBack} 
+              id="ratings-search-box" 
+              placeHolder="Search ratings by driver or client name" />
           </div>
-          <ResultsTable headers={["Rating", "From", "To", "Message", "Date", "Delete"]} objects={this.state.results}/>
+          <ResultsTable 
+            reload={this.reloadComponent} 
+            type="ratings" 
+            headers={["Rating", "From", "To", "Message", "Date", "Delete"]} 
+            objects={this.state.results}/>
         </div>
       </div>
     );
   }
 }
 
-export default Ratings;
+export default Ratings; 

@@ -11,7 +11,7 @@ class Rides extends Component {
     super(props);
     this.state = {
       "results": [],
-      "query": {"query": "query { getRides{ id driverName clientName amount startLocation{ lat lng } destination{ lat lng } rideState cancelReason rating } }"}
+      "query": null
     };
     this.reloadComponent = this.reloadComponent.bind(this);
     this.listCallBack = this.listCallBack.bind(this);
@@ -19,12 +19,15 @@ class Rides extends Component {
   }
 
   componentDidMount() {
-    this.setState({query: makeQuery("query", "getRides", ["id", "amount", "driverName", "clientName", "startLocation{ lat lng }", "destination{ lat lng }", "rideState"], {"state": "active"}, ["$state: String!"])}, () => this.reloadComponent());
+    this.setState({query: 
+      makeQuery("query", "getRides", 
+      ["id", "amount", "driverName", "clientName", "startLocation{ lat lng }", "destination{ lat lng }", "rideState"],
+      {"state": "active"}, ["$state: String!"])
+    }, () => this.reloadComponent());
   }
 
   reloadComponent() {
     graphRequest("graphql", this.state.query).then(res => {
-      // parse response
       const func = Object.keys(res.data.data);
       res = res.data.data[func];
       this.setState({ results: res });
@@ -47,11 +50,19 @@ class Rides extends Component {
         query = "all";
         break;
     }
-    this.setState({query: makeQuery("query", "getRides", ["id", "amount", "driverName", "clientName", "startLocation{ lat lng }", "destination{ lat lng }", "rideState"], {"state": query}, ["$state: String!"])}, this.reloadComponent);
+    this.setState({
+      query: makeQuery("query", "getRides", 
+      ["id", "amount", "driverName", "clientName", "startLocation{ lat lng }", "destination{ lat lng }", "rideState"], 
+      {"state": query}, ["$state: String!"])
+    }, this.reloadComponent);
   }
 
   searchCallBack(query){    
-    this.setState({query: makeQuery("query", "getRide", ["id", "amount", "driverName", "clientName", "startLocation{ lat lng }", "destination{ lat lng }", "rideState"], {"name": query}, ["$name: String!"])}, this.reloadComponent);
+    this.setState({
+      query: makeQuery("query", "getRide", 
+      ["id", "amount", "driverName", "clientName", "startLocation{ lat lng }", "destination{ lat lng }", "rideState"], 
+      {"name": query}, ["$name: String!"])
+    }, this.reloadComponent);
 }
 
   render() {
@@ -60,10 +71,20 @@ class Rides extends Component {
         <div className="title"><h1>Rides Menu</h1></div>
         <div className="search-box">
           <div className="search-options">
-            <ListDropdown listCallBack={this.listCallBack} id="ratings-dropdown" items={["Active Rides", "Finished Rides", "Canceled Rides", "All Rides"]} />
-            <SearchBox searchCallBack={this.searchCallBack} id="client-search-box" placeHolder="Search rides by client or driver name" />
+            <ListDropdown 
+              listCallBack={this.listCallBack} 
+              id="ratings-dropdown" 
+              items={["Active Rides", "Finished Rides", "Canceled Rides", "All Rides"]} />
+            <SearchBox 
+              searchCallBack={this.searchCallBack} 
+              id="client-search-box" 
+              placeHolder="Search rides by client or driver name" />
           </div>
-          <ResultsTable reload={this.reloadComponent} type="rides" headers={["Amount", "Driver", "Client", "State", "Ride Map", "Edit", "Delete"]} objects={this.state.results}/>
+          <ResultsTable 
+            reload={this.reloadComponent} 
+            type="rides" 
+            headers={["Amount", "Driver", "Client", "State", "Ride Map", "Edit", "Delete"]} 
+            objects={this.state.results}/>
         </div>
       </div>
     );
