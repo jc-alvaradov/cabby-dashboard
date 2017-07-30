@@ -70,6 +70,7 @@ html{
 .menu{
   position: relative;
   width: 20rem;
+  min-width: 15rem;
   height: auto;
   top: 0;
   left: 0;

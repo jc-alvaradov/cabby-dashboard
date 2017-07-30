@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchBox from './searchBox';
 import ListDropdown from './listDropdown';
-import ResultsTable from './resultsTable';
+import ResultsTable from './results/client';
 import DeleteBtn from './deleteBtn';
 import { graphRequest } from './graphRequest';
 import { makeQuery } from './makeQuery';
@@ -21,27 +21,29 @@ class Clients extends Component {
   componentDidMount() {
     this.setState({query: 
       makeQuery("query", "getClients", 
-      ["id", "clientName", "phone", "email", "rating", "active"],
-      {"active": "true"}, ["$state: String!"])
+      ["id", "clientName", "phone", "rating", "active", "payment"],
+      {"state": "active"}, ["$state: String!"])
     }, () => this.reloadComponent());
   }
 
   reloadComponent() {
     graphRequest("graphql", this.state.query).then(res => {
-      const func = Object.keys(res.data.data);
-      res = res.data.data[func];
-      this.setState({ results: res });
-      this.setState({ loading: false });
+      if(res !== undefined) {
+        const func = Object.keys(res.data.data);
+        res = res.data.data[func];
+        this.setState({ results: res });
+        this.setState({ loading: false });
+      }
     });
   }
 
   listCallBack(selected) {
     switch(selected) {
       case "Active Clients":
-        selected = "true";
+        selected = "active";
         break;
       case "Inactive Clients":
-        selected = "false";
+        selected = "inactive";
         break;
       case "All Clients":
         selected = "all";
@@ -49,16 +51,16 @@ class Clients extends Component {
     }
     this.setState({query: 
       makeQuery("query", "getClients", 
-      ["id", "clientName", "phone", "email", "rating", "active"],
-      {"active": selected}, ["$active: String!"])
+      ["id", "clientName", "phone", "rating", "active", "payment"],
+      {"state": selected}, ["$state: String!"])
     }, () => this.reloadComponent());
   }
 
   searchCallBack(clientName) {    
     this.setState({
       query: makeQuery("query", "getClient", 
-      ["id", "clientName", "phone", "email", "rating", "active"], 
-      {"name": clientName}, ["$name: String!"])
+      ["id", "clientName", "phone", "rating", "active", "payment"], 
+      {"clientName": clientName}, ["$clientName: String!"])
     }, this.reloadComponent);
 }
 
@@ -66,7 +68,7 @@ class Clients extends Component {
     return(
       <div>
         <div className="title">
-          <h1>Rides Menu</h1>
+          <h1>Clients Menu</h1>
         </div>
         <div className="search-box">
           <div className="search-options">
@@ -81,8 +83,6 @@ class Clients extends Component {
           </div>
           <ResultsTable 
             reload={this.reloadComponent} 
-            type="clients" 
-            headers={["Name", "Phone Number", "Email", "Rating", "State", "Edit", "Delete"]} 
             objects={this.state.results}/>
         </div>
       </div>

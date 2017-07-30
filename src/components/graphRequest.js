@@ -8,7 +8,7 @@ export function graphRequest(domain, data){
   return axios.post(`http://localhost:3000/${domain}`, data)
   .then(res => {
     return res;
-  }) // <--- return res
+  })
   .catch(err => {
     console.log(`Hubo un error en la peticion al dominio ${domain}: ${err}`);
   });

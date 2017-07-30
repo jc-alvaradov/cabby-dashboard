@@ -3,8 +3,7 @@ import { Button } from 'react-bootstrap';
 import ModalWindow from './modalWindow';
 import RideForm from './forms/rideForm';
 import DriverForm from './forms/driverForm';
-//import ClientForm from './forms/clientForm';
-//import RatingForm from './forms/ratingForm';
+import ClientForm from './forms/clientForm';
 
 class EditBtn extends Component {
   constructor(props){
@@ -22,10 +21,7 @@ class EditBtn extends Component {
         content = <DriverForm data={this.props.data} close={this.close}/>;
         break;
       case "clients":
-        //content = <ClientForm data={this.props.data} />;
-        break;
-      case "ratings":
-        //content = <RatingForm data={this.props.data} />;
+        content = <ClientForm data={this.props.data} close={this.close}/>;
         break;
       default:
         content = null;

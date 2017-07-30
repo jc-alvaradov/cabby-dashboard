@@ -9,7 +9,7 @@ class ListDropdown extends Component {
   }
   render(){
     const items = this.props.items.map((item) => 
-      <MenuItem eventKey={item} onClick={() => this.updateView(item)} className={(this.state.selected === item) ? "active" : ""}>{item}</MenuItem>
+      <MenuItem eventKey={item} key={item} onClick={() => this.updateView(item)} className={(this.state.selected === item) ? "active" : ""}>{item}</MenuItem>
     );
 
     return(

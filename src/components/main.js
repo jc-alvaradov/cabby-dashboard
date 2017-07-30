@@ -20,7 +20,7 @@ class Main extends Component{
   }
 
   updateRender() {
-    graphRequest("login").then(res => {
+    graphRequest("login").then(res => { 
       if(res.data == "LOGIN-SUCCESS") {
         this.setState({render: <Container update={this.updateRender}/> });
       }else {

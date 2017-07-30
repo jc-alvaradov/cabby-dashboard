@@ -21,19 +21,17 @@ class RideForm extends Component {
 
   saveChanges() {
     // revisar si el cliente agrego el signo de peso en amount, si no, entonces lo agrega
-    const obj = {
-      "ride": {
-        "_id": this.props.data._id,
-        "id": this.props.data.id, 
-        "clientName": this.state.clientName,
-        "driverName": this.state.driverName,
-        "rideState": this.state.rideState,
-        "amount": this.state.amount,
-        "startLocation": {lat: this.state.startLat, lng: this.state.startLng},
-        "destination": {lat: this.state.destLat, lng: this.state.destLng}
-      }
+    const ride = {
+      "id": this.props.data.id, 
+      "clientName": this.state.clientName,
+      "driverName": this.state.driverName,
+      "rideState": this.state.rideState,
+      "amount": this.state.amount,
+      "startLocation": {lat: this.state.startLat, lng: this.state.startLng},
+      "destination": {lat: this.state.destLat, lng: this.state.destLng}
     }
-    let query = makeQuery("mutation", "editRide", null, obj, ["$ride: RideEditInput!"]); 
+
+    const query = makeQuery("mutation", "editRide", null, {ride}, ["$ride: RideEditInput!"]); 
     graphRequest("graphql", query).then(() => this.props.close());
   }
 

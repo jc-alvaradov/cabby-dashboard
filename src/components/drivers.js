@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchBox from './searchBox';
 import ListDropdown from './listDropdown';
-import ResultsTable from './resultsTable';
+import ResultsTable from './results/driver';
 import DeleteBtn from './deleteBtn';
 import { graphRequest } from './graphRequest';
 import { makeQuery } from './makeQuery';
@@ -21,27 +21,29 @@ class Drivers extends Component {
   componentDidMount() {
     this.setState({
       query: makeQuery("query", "getDrivers", 
-      ["id", "photo", "driverName", "phone", "rating", "carModel", "carPatent", "earnings", "active", "location{ lat lng }"],
-      {"active": query}, ["$active: String!"])
+      ["id", "photo", "driverName", "phone", "rating", "carModel", "carPlate", "earnings", "active", "location{ lat lng }", "payment"],
+      {"state": "active"}, ["$state: String!"])
     }, () => this.reloadComponent());
   }
 
   reloadComponent() {
     graphRequest("graphql", this.state.query).then(res => {
-      const func = Object.keys(res.data.data);
-      res = res.data.data[func];
-      this.setState({ results: res });
-      this.setState({ loading: false });
+      if(res !== undefined) {
+        const func = Object.keys(res.data.data);
+        res = res.data.data[func];
+        this.setState({ results: res });
+        this.setState({ loading: false });
+      }
     });
   }
 
   listCallBack(query) {
     switch(query) {
       case "Active Drivers":
-        query = true;
+        query = "active";
         break;
       case "Inactive Drivers":
-        query = false;
+        query = "inactive";
         break;
       case "All Drivers":
         query = "all";
@@ -49,17 +51,17 @@ class Drivers extends Component {
     }
     this.setState({
       query: makeQuery("query", "getDrivers", 
-      ["id", "photo", "driverName", "phone", "rating", "carModel", "carPatent", "earnings", "active", "location{ lat lng }"],
-      {"active": query}, ["$active: String!"])
+      ["id", "photo", "driverName", "phone", "rating", "carModel", "carPlate", "earnings", "active", "location{ lat lng }", "payment"],
+      {"state": query}, ["$state: String!"])
     }, () => this.reloadComponent());
   }
 
-  searchCallBack(searchTerm){
-    // user can search a driver by name or car patent    
+  searchCallBack(searchTerm) {
+    // user can search a driver by name or car patent  
     this.setState({
       query: makeQuery("query", "getDriver",
-      ["id", "photo", "driverName", "phone", "rating", "carModel", "carPatent", "earnings", "active", "location{ lat lng }"], 
-      {"search": searchTerm}, ["$search: String!"])
+      ["id", "photo", "driverName", "phone", "rating", "carModel", "carPlate", "earnings", "active", "location{ lat lng }", "payment"], 
+      {"driverName": searchTerm}, ["$driverName: String!"])
     }, this.reloadComponent);
   }
 
@@ -81,9 +83,7 @@ class Drivers extends Component {
               placeHolder="Search driver by name, id or car patent" />
           </div>
           <ResultsTable 
-            reload={this.reloadComponent} 
-            type="drivers" 
-            headers={["Photo", "Name", "Phone Number", "Rating", "Car model", "Patent", "Earnings", "State", "Current Location"]} 
+            reload={this.reloadComponent}
             objects={this.state.results}/>
         </div>
       </div>

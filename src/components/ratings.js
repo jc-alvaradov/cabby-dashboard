@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchBox from './searchBox';
 import ListDropdown from './listDropdown';
-import ResultsTable from './resultsTable';
+import ResultsTable from './results/rating';
 import DeleteBtn from './deleteBtn';
 import { graphRequest } from './graphRequest';
 import { makeQuery } from './makeQuery';
@@ -28,10 +28,12 @@ class Ratings extends Component {
 
   reloadComponent() {
     graphRequest("graphql", this.state.query).then(res => {
-      const func = Object.keys(res.data.data);
-      res = res.data.data[func];
-      this.setState({ results: res });
-      this.setState({ loading: false });
+      if(res !== undefined) {
+        const func = Object.keys(res.data.data);
+        res = res.data.data[func];
+        this.setState({ results: res });
+        this.setState({ loading: false });
+      }
     });
   }
 
@@ -84,8 +86,6 @@ class Ratings extends Component {
           </div>
           <ResultsTable 
             reload={this.reloadComponent} 
-            type="ratings" 
-            headers={["Rating", "From", "To", "Message", "Date", "Delete"]} 
             objects={this.state.results}/>
         </div>
       </div>

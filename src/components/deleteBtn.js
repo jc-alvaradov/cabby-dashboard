@@ -45,13 +45,13 @@ class DeleteBtn extends Component{
         deleteType = "deleteRide";
         break;
       case "drivers":
-        deleteType = "deleteDrivers";
+        deleteType = "deleteDriver";
         break;
       case "clients":
-        deleteType = "deleteClients";
+        deleteType = "deleteClient";
         break;
       case "ratings":
-        deleteType = "deleteRatings";
+        deleteType = "deleteRating";
         break;
       default: 
         return;

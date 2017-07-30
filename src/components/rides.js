@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchBox from './searchBox';
 import ListDropdown from './listDropdown';
-import ResultsTable from './resultsTable';
+import ResultsTable from './results/ride';
 import DeleteBtn from './deleteBtn';
 import { graphRequest } from './graphRequest';
 import { makeQuery } from './makeQuery';
@@ -82,8 +82,6 @@ class Rides extends Component {
           </div>
           <ResultsTable 
             reload={this.reloadComponent} 
-            type="rides" 
-            headers={["Amount", "Driver", "Client", "State", "Ride Map", "Edit", "Delete"]} 
             objects={this.state.results}/>
         </div>
       </div>
