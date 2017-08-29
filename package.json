@@ -1,8 +1,3 @@
-/*
-  "start": "webpack-dev-server --hot --inline --progress",
-  "build": "NODE_ENV=production node_modules/.bin/webpack -p --progress --colors"
-*/
-
 {
   "name": "tn-dashboard",
   "version": "1.0.0",
