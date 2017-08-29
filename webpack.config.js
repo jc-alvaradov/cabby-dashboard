@@ -23,8 +23,10 @@ module.exports = {
     filename: 'index.js',
   },
   devServer: {
+    host: '45.7.229.110',
+    port: 8080,
     publicPath: "/",
     contentBase: "./public",
-    hot: true
+    hot: true,
   }
 };

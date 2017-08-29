@@ -5,7 +5,7 @@ axios.defaults.useXDomain = true;
 
 export function graphRequest(domain) {
   return axios
-    .get(`https://tn-server.herokuapp.com/${domain}`)
+    .get(`http://localhost:3000/${domain}`)
     .then(res => {
       return res;
     })
