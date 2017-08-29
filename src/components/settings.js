@@ -1,28 +1,54 @@
-import React, { Component } from 'react';
-import { FormControl, Button} from 'react-bootstrap';
-class Settings extends Component{
-  constructor(props){
+import React, { Component } from "react";
+import { FormControl, Button } from "react-bootstrap";
+class Settings extends Component {
+  constructor(props) {
     super(props);
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div>
-        <div className="title"><h1>Settings Menu</h1></div>
+        <div className="title">
+          <h1>Settings Menu</h1>
+        </div>
         <div className="settings-panel">
           <table>
             <tbody>
               <tr>
-                <td><b>App Name: </b></td>
-                <td><FormControl type="email" placeholder="Taxi Native" className="input-search-box" /></td>
+                <td>
+                  <b>App Name: </b>
+                </td>
+                <td>
+                  <FormControl
+                    type="email"
+                    placeholder="Taxi Native"
+                    className="input-search-box"
+                  />
+                </td>
               </tr>
               <tr>
-                <td><b>App Photo: </b></td>
-                <td><FormControl type="email" placeholder="Photo Link" className="input-search-box" /></td>
+                <td>
+                  <b>App Photo: </b>
+                </td>
+                <td>
+                  <FormControl
+                    type="email"
+                    placeholder="Photo Link"
+                    className="input-search-box"
+                  />
+                </td>
               </tr>
               <tr>
-                <td><b>Google Maps API Key: </b></td>
-                <td><FormControl type="email" placeholder="API key" className="input-search-box" /></td>
+                <td>
+                  <b>Google Maps API Key: </b>
+                </td>
+                <td>
+                  <FormControl
+                    type="email"
+                    placeholder="API key"
+                    className="input-search-box"
+                  />
+                </td>
               </tr>
             </tbody>
           </table>

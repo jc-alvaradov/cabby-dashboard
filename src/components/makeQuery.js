@@ -1,27 +1,29 @@
-export function makeQuery (type, resolver, props, vars, vartypes) {
+export function makeQuery(type, resolver, props, vars, vartypes) {
   // type puede ser query o mutation
   // resolver guarda el nombre del resolver que se usara, ej: getRides
   // vars es un objeto {} con keys que corresponden a variables para la query
   // varDef es un objeto {} con keys que corresponden a las variables y sus definiciones
   // props es un array [] con los datos que se pediran en la query, ej: name, id, status
-    
-  if(vars) {
-    const vardefs = Object.keys(vars).map((key) => `${key}: $${key}`);
-    if(props) {
+
+  if (vars) {
+    const vardefs = Object.keys(vars).map(key => `${key}: $${key}`);
+    if (props) {
       // es una query
       return {
-        "query": `${type}(${vartypes.toString()}) { ${resolver}(${vardefs}){ ${props.join(" ")}}}`, 
-        "variables": vars
+        query: `${type}(${vartypes.toString()}) { ${resolver}(${vardefs}){ ${props.join(
+          " "
+        )}}}`,
+        variables: vars
       };
-    }else {
+    } else {
       // es una mutation
       return {
-        "query": `${type}(${vartypes.toString()}) { ${resolver}(${vardefs})}`, 
-        "variables": vars
+        query: `${type}(${vartypes.toString()}) { ${resolver}(${vardefs})}`,
+        variables: vars
       };
     }
-  }else {
-   return {"query": `${type} { ${resolver}{ ${props.join(" ")}}}`};
+  } else {
+    return { query: `${type} { ${resolver}{ ${props.join(" ")}}}` };
   }
 }
 

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Button, FormControl } from 'react-bootstrap';
-import { graphRequest } from './graphRequest';
+import React, { Component } from "react";
+import { Button, FormControl } from "react-bootstrap";
+import { graphRequest } from "./graphRequest";
 
-class LoginForm extends Component{
-  constructor(props){
+class LoginForm extends Component {
+  constructor(props) {
     super(props);
     this.state = {
       username: null,
@@ -12,48 +12,60 @@ class LoginForm extends Component{
     this.loginUser = this.loginUser.bind(this);
   }
 
-  render(){
+  render() {
     return (
       <div className="flex-center">
         <div className="login-panel">
           <div>
-            <h4><b>Username</b></h4>
-            <FormControl 
-              style={{width: 200}} 
-              type="text" 
+            <h4>
+              <b>Username</b>
+            </h4>
+            <FormControl
+              style={{ width: 200 }}
+              type="text"
               placeholder="Username"
-              className="input-search-box" 
-              onChange={(e) => this.setState({username: e.target.value})} />
+              className="input-search-box"
+              onChange={e => this.setState({ username: e.target.value })}
+            />
             <br />
-            <h4><b>Password</b></h4>
-            <FormControl 
-              style={{width: 200}} 
-              type="password" 
+            <h4>
+              <b>Password</b>
+            </h4>
+            <FormControl
+              style={{ width: 200 }}
+              type="password"
               placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;"
-              className="input-search-box" 
-              onChange={(e) => this.setState({passwd: e.target.value})} />
+              className="input-search-box"
+              onChange={e => this.setState({ passwd: e.target.value })}
+            />
           </div>
           <div className="center-div">
-            <Button className="main-btn primary-btn" style={{width: 200}} onClick={() => this.loginUser()}>Login</Button>
+            <Button
+              className="main-btn primary-btn"
+              style={{ width: 200 }}
+              onClick={() => this.loginUser()}
+            >
+              Login
+            </Button>
           </div>
         </div>
       </div>
     );
   }
-  
-  loginUser(){
-    if(this.state.username && this.state.passwd){
+
+  loginUser() {
+    if (this.state.username && this.state.passwd) {
       graphRequest("login", {
         username: this.state.username.trim(),
         password: this.state.passwd.trim()
       }).then(res => {
-        if(res.data == "LOGIN-SUCCESS"){
+        if (res.data == "LOGIN-SUCCESS") {
           this.props.update();
-        }else{
+        } else {
           alert("Login error, try again");
         }
       });
-    }else{
+    } else {
       alert("Please fill all fields.");
     }
   }

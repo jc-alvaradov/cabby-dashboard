@@ -1,19 +1,19 @@
-import React, { Component } from 'react';
-import Rides from './rides';
-import Drivers from './drivers';
-import Clients from './clients';
-import Ratings from './ratings';
-import Settings from './settings';
+import React, { Component } from "react";
+import Rides from "./rides";
+import Drivers from "./drivers";
+import Clients from "./clients";
+import Ratings from "./ratings";
+import Settings from "./settings";
 
-class Panel extends Component{
-  constructor(props){
+class Panel extends Component {
+  constructor(props) {
     super(props);
   }
 
-  render(){
+  render() {
     let content;
 
-    switch(this.props.active){
+    switch (this.props.active) {
       case "Rides":
         content = <Rides />;
         break;
@@ -28,12 +28,12 @@ class Panel extends Component{
         break;
       case "Settings":
         content = <Settings />;
-        break;          
-      default: 
-        content = <Rides />
+        break;
+      default:
+        content = <Rides />;
     }
 
-    return(
+    return (
       <div className="panel">
         {content}
       </div>
