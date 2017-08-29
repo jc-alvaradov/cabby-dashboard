@@ -5,7 +5,8 @@
   "author": "jc-alvaradov",
   "license": "MIT",
   "scripts": {
-    "start": "node ./src/app.js",
+    "start": "webpack-dev-server --hot --inline --progress",
+    "build": "NODE_ENV=production node_modules/.bin/webpack -p --progress --colors"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
