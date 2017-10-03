@@ -25,7 +25,7 @@ class Rides extends Component {
           "query",
           "getRides",
           [
-            "id",
+            "_id",
             "amount",
             "driverName",
             "clientName",
@@ -71,7 +71,7 @@ class Rides extends Component {
           "query",
           "getRides",
           [
-            "id",
+            "_id",
             "amount",
             "driverName",
             "clientName",
@@ -94,7 +94,7 @@ class Rides extends Component {
           "query",
           "getRide",
           [
-            "id",
+            "_id",
             "amount",
             "driverName",
             "clientName",

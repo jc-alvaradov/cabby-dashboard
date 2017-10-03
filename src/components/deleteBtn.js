@@ -72,9 +72,13 @@ class DeleteBtn extends Component {
         return;
     }
 
-    let query = makeQuery("mutation", deleteType, null, { id: this.props.id }, [
-      "$id: String!"
-    ]);
+    let query = makeQuery(
+      "mutation",
+      deleteType,
+      null,
+      { id: this.props._id },
+      ["$id: String!"]
+    );
     graphRequest("graphql", query).then(() => {
       this.props.reload();
       this.close();

@@ -8,7 +8,7 @@ class ListDropdown extends Component {
     this.updateView = this.updateView.bind(this);
   }
   render() {
-    const items = this.props.items.map(item =>
+    const items = this.props.items.map(item => (
       <MenuItem
         eventKey={item}
         key={item}
@@ -17,7 +17,7 @@ class ListDropdown extends Component {
       >
         {item}
       </MenuItem>
-    );
+    ));
 
     return (
       <div>

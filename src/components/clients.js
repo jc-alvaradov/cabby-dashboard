@@ -24,7 +24,7 @@ class Clients extends Component {
         query: makeQuery(
           "query",
           "getClients",
-          ["id", "clientName", "phone", "rating", "active", "payment"],
+          ["_id", "clientName", "phone", "rating", "active", "payment"],
           { state: "active" },
           ["$state: String!"]
         )
@@ -61,7 +61,7 @@ class Clients extends Component {
         query: makeQuery(
           "query",
           "getClients",
-          ["id", "clientName", "phone", "rating", "active", "payment"],
+          ["_id", "clientName", "phone", "rating", "active", "payment"],
           { state: selected },
           ["$state: String!"]
         )
@@ -76,7 +76,7 @@ class Clients extends Component {
         query: makeQuery(
           "query",
           "getClient",
-          ["id", "clientName", "phone", "rating", "active", "payment"],
+          ["_id", "clientName", "phone", "rating", "active", "payment"],
           { clientName: clientName },
           ["$clientName: String!"]
         )
@@ -101,7 +101,7 @@ class Clients extends Component {
             <SearchBox
               searchCallBack={this.searchCallBack}
               id="clients-search-box"
-              placeHolder="Search clients by name or id"
+              placeHolder="Search clients by name"
             />
           </div>
           <ResultsTable

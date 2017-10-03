@@ -25,7 +25,7 @@ class Drivers extends Component {
           "query",
           "getDrivers",
           [
-            "id",
+            "_id",
             "photo",
             "driverName",
             "phone",
@@ -74,7 +74,7 @@ class Drivers extends Component {
           "query",
           "getDrivers",
           [
-            "id",
+            "_id",
             "photo",
             "driverName",
             "phone",
@@ -102,7 +102,7 @@ class Drivers extends Component {
           "query",
           "getDriver",
           [
-            "id",
+            "_id",
             "photo",
             "driverName",
             "phone",

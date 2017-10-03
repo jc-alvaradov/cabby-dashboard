@@ -24,7 +24,7 @@ class Ratings extends Component {
         query: makeQuery(
           "query",
           "getRatings",
-          ["id", "rating", "from", "to", "message", "date"],
+          ["_id", "rating", "from", "to", "message", "date"],
           { filter: "most recent" },
           ["$filter: String!"]
         )
@@ -64,7 +64,7 @@ class Ratings extends Component {
         query: makeQuery(
           "query",
           "getRatings",
-          ["id", "rating", "from", "to", "message", "date"],
+          ["_id", "rating", "from", "to", "message", "date"],
           { filter: selected },
           ["$filter: String!"]
         )
@@ -79,7 +79,7 @@ class Ratings extends Component {
         query: makeQuery(
           "query",
           "getRating",
-          ["id", "rating", "from", "to", "message", "date"],
+          ["_id", "rating", "from", "to", "message", "date"],
           { name: searchName },
           ["$name: String!"]
         )
