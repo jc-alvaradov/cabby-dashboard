@@ -6,7 +6,7 @@ axios.defaults.useXDomain = true;
 // check axios props
 
 export function graphRequest(domain, data) {
-  !data ? {} : data; // esto esta bien? no debiera ser data = {}?
+  !data ? {} : data;
   return axios
     .post(`http://45.7.229.110:3000/${domain}`, data)
     .then(res => {
