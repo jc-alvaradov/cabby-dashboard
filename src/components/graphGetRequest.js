@@ -5,7 +5,7 @@ axios.defaults.useXDomain = true;
 
 export function graphRequest(domain) {
   return axios
-    .get(`http://45.7.229.110:3000/${domain}`)
+    .get(`http://127.0.0.1:3000/${domain}`)
     .then(res => {
       return res;
     })
